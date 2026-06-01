@@ -1,0 +1,10 @@
+pandas
+numpy
+tensorflow
+scikit-learn
+matplotlib
+seaborn
+xgboost
+earthengine-api
+geopy
+python-dotenv

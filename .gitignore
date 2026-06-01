@@ -1,0 +1,14 @@
+# python environments
+.venv/
+venv/
+__pycache__/
+
+# data and output models
+# *.csv
+*.h5
+*.png
+# bipad_data/
+
+# OS generated files
+.DS_Store
+.env

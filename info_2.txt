@@ -1,0 +1,24 @@
+How Professionals Solve This
+There are 3 standard approaches in operational disaster risk assessment:
+
+1. Multi-Point Elevation-Stratified Sampling (Most practical for us)
+Sample multiple points at different elevations within the area and report the worst-case (max-risk) across all terrain types. This is what systems like FEWS NET and GLOFAS do.
+
+2. Watershed/Catchment-Based Analysis
+Instead of a point, analyze the entire hydrological basin. Tools like HEC-RAS and LISFLOOD work this way. But this requires pre-computed watershed boundaries and drainage networks.
+
+3. Administrative Boundary Grid Sampling
+Lay a grid of points across the entire municipality polygon, run the model on each, and aggregate. This is the most complete but most expensive computationally.
+
+For our system, Option 1 is the best fit. We can implement it without changing the model — just the API query strategy. When a user searches for a place, instead of hitting one coordinate, we:
+
+Get a small bounding box around the location (~2-3km radius)
+Sample 5 points: the centroid + the 4 cardinal offsets (N/S/E/W ~1.5km apart)
+Run all 5 through the API
+Report the maximum risk across all sampled points (worst-case for early warning)
+Show which terrain type drove the alert (e.g., "Valley floor flood risk detected")
+This gives you the "overall situation" for the area rather than gambling on where a single pin lands.
+
+Would you like me to implement this multi-point sampling directly into the API? It would add ~30-60 seconds of processing time (5 GEE calls instead of 1) but would dramatically improve real-world accuracy. Or would you prefer I just document this as a "Future Work / Recommended Enhancement" in your thesis defense notes?
+
+3:00 PM

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nepal Hazard System - Algorithm Diagrams</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a1a; color: #fff; font-family: 'Segoe UI', sans-serif; padding: 40px; }
+  h1 { text-align: center; font-size: 28px; margin-bottom: 10px; color: #e94560; }
+  h2 { text-align: center; font-size: 20px; margin: 40px 0 20px; color: #aaa; border-top: 1px solid #333; padding-top: 30px; }
+  .diagram-wrap { background: #fff; border-radius: 12px; padding: 30px; margin: 20px auto; max-width: 1200px; overflow-x: auto; }
+  .mermaid { text-align: center; }
+  .subtitle { text-align: center; color: #888; font-size: 14px; margin-bottom: 40px; }
+</style>
+</head>
+<body>
+
+<h1>Nepal Multi-Hazard Prediction System</h1>
+<p class="subtitle">Complete Algorithm Pipeline — End-to-End</p>
+
+<!-- DIAGRAM 1: Ground Truth -->
+<h2>Phase 1: Ground Truth Labeling Pipeline</h2>
+<div class="diagram-wrap" id="d1">
+<pre class="mermaid">
+flowchart TD
+    A1["🏛️ BIPAD Portal\nNepal Govt Disaster Database"]
+    A2["bipad_labeler.py\nFilter: Landslide + Flood\nDate Range: 2021–2023"]
+    A3["bipad_labels_filtered.csv\n~2,200 verified incidents"]
+    A4["geocoder_script.py\nMunicipality → lat, lon\nvia geemap.geocode"]
+    A5["bipad_labels_with_coords.csv\nIncidents with GPS coordinates"]
+    A6["generate_samples.py\nBalanced Dataset Creator"]
+    A7["✅ Positive Samples\nActual BIPAD disaster sites\nlabel = 1"]
+    A8["❌ Negative Samples\nRandom Nepal locations\n5× oversampling, label = 0"]
+    A9["sample_locations_raw.csv\n~6,500 balanced samples\nlat, lon, date, label"]
+
+    A1 --> A2 --> A3 --> A4 --> A5 --> A6
+    A6 --> A7
+    A6 --> A8
+    A7 --> A9
+    A8 --> A9
+</pre>
+</div>
+
+<!-- DIAGRAM 2: Satellite Extraction -->
+<h2>Phase 2: Multi-Sensor Satellite Data Extraction</h2>
+<div class="diagram-wrap" id="d2">
+<pre class="mermaid">
+flowchart TD
+    B0["sample_locations_raw.csv\nlat, lon, date, label"]
+
+    subgraph SENSORS["5 Satellite Sensor Pillars"]
+        direction LR
+        S1["🛰️ Sentinel-1 SAR\nVV + VH polarization\nFlood surface detection"]
+        S2["🌿 Sentinel-2\nNDVI = B8−B4 / B8+B4\nVegetation health"]
+        S3["💨 Sentinel-5P\nAerosol Index\nSmoke / Air quality"]
+        S4["🌡️ MODIS LST\nLand Surface Temp\nFire / Drought proxy"]
+        S5["🌧️ TerraClimate\nPrecipitation + Soil\nRainfall + saturation"]
+    end
+
+    subgraph TOPO["Static Terrain — SRTM 30m"]
+        direction LR
+        T1["⛰️ Slope"]
+        T2["🧭 Aspect"]
+        T3["📊 TPI"]
+    end
+
+    B1["extract_high_res_samples.py"]
+    B3["500m Footprint\nbuffer 250m, bounds"]
+    B4["Bilinear Upsampling\nLow-res → 30m alignment"]
+    B5["reduceRegion — mean, 30m"]
+    B2["Per Sample: 14-Day Lookback\nT0...T13 × 10 Features"]
+    B6["nepal_500m_sequences_flat.csv\n~6,500 rows × 140 columns\nT0_VV ... T13_TPI + label"]
+
+    B0 --> B1
+    B1 --> SENSORS
+    B1 --> TOPO
+    SENSORS --> B3
+    TOPO --> B3
+    B3 --> B4 --> B5 --> B2 --> B6
+</pre>
+</div>
+
+<!-- DIAGRAM 3: Training -->
+<h2>Phase 3: Model Training & Comparison</h2>
+<div class="diagram-wrap" id="d3">
+<pre class="mermaid">
+flowchart TD
+    C0["nepal_500m_sequences_flat.csv"]
+
+    subgraph PREP["Data Preparation"]
+        C1["Reshape → 3D Tensor\nSamples, 14, 10"]
+        C2["StandardScaler\nZero-mean, unit-variance"]
+        C3["Train / Test Split\n80% / 20%, seed=42"]
+        C4["Class Weighting\nBalanced for imbalanced labels"]
+        C1 --> C2 --> C3 --> C4
+    end
+
+    subgraph BASELINES["🌲 Baseline Models — 2D Flat Input"]
+        direction LR
+        M1["Random Forest\n200 trees, balanced"]
+        M2["XGBoost\n200 trees, depth=6"]
+    end
+
+    subgraph LSTM_UNI["🔁 Unidirectional LSTM"]
+        M3["LSTM 64 → Drop 0.3\n→ LSTM 32 → Drop 0.3\n→ Dense 16 relu\n→ Dense 1 sigmoid"]
+    end
+
+    subgraph BILSTM["⭐ PRIMARY: Bi-LSTM"]
+        M4["Bidirectional LSTM 64\n→ Dropout 0.3\n→ Bidirectional LSTM 32\n→ Dropout 0.3\n→ Dense 16 relu\n→ Dense 1 sigmoid"]
+        M5["Loss: Binary CrossEntropy\nOptimizer: Adam\nEpochs: 30, Batch: 32"]
+        M4 --- M5
+    end
+
+    C6["Evaluation Metrics:\nAccuracy, Precision, Recall\nF1-Score, ROC-AUC"]
+    C7["nepal_hazard_model_500m.h5\nSaved Bi-LSTM weights"]
+    C8["confusion_matrix_500m.png"]
+
+    C0 --> PREP
+    PREP --> BASELINES
+    PREP --> LSTM_UNI
+    PREP --> BILSTM
+    BASELINES --> C6
+    LSTM_UNI --> C6
+    BILSTM --> C6
+    BILSTM --> C7
+    C6 --> C8
+</pre>
+</div>
+
+<!-- DIAGRAM 4: Real-Time Prediction -->
+<h2>Phase 4: Real-Time Prediction Engine</h2>
+<div class="diagram-wrap" id="d4">
+<pre class="mermaid">
+flowchart TD
+    D0["📍 User Input: lat, lon, date"]
+
+    subgraph NODE1["Node 1: Local Sensor Fusion"]
+        D1["TerraClimate → pr, soil"]
+        D2["MODIS → LST raw"]
+        D3["SRTM → Slope, Aspect, TPI"]
+        D4["Open-Meteo → 14-day rain list"]
+        D5["MODIS NDVI → Vegetation"]
+        D6["MODIS Aerosol → Smoke"]
+    end
+
+    D7["Build 14×10 Temporal Sequence"]
+    D8["StandardScaler.transform"]
+    D9["Bi-LSTM model.predict"]
+    D10["Base Probability P_hat"]
+
+    subgraph SEISMIC["🌍 Seismic Check"]
+        E1["USGS Earthquake API\nLast 14 days, 50km"]
+        E2{"Max Magnitude?"}
+        E3["≥5.0 → +30%"]
+        E4["≥4.0 → +15%"]
+        E5["≥3.0 → +5%"]
+        E1 --> E2
+        E2 --> E3
+        E2 --> E4
+        E2 --> E5
+    end
+
+    subgraph CASCADE["🌊 Upstream Cascade"]
+        F0{"Slope < 18 deg?\nFlat = valley town"}
+        F1["Scan 3 Upstream Points\nN, NE, NW at ~8km"]
+        F2["Get upstream rainfall"]
+        F3{"Rain > 30mm AND\nupstream steeper\nby ≥ 4 deg?"}
+        F4["Run Bi-LSTM on\nupstream sensors"]
+        F5{"Upstream P > 0.4\nAND rain > 40mm?"}
+        F6["🚨 Cascading River Flood\nOverride probability"]
+        F0 -->|Yes| F1 --> F2 --> F3
+        F3 -->|Yes| F4 --> F5
+        F5 -->|Yes| F6
+    end
+
+    subgraph CALIBRATE["🎛️ Calibration"]
+        G1{"Slope < 5 deg?\nUrban flat"}
+        G2["Rain < 150mm → P×0.3\nRain < 250mm → P×0.6"]
+        G5["Sigmoid: P × 1−exp−rain/100"]
+        G1 -->|Yes| G2
+        G1 -->|No| G5
+    end
+
+    H1["Final Calibrated Probability"]
+
+    subgraph CLASSIFY["🏷️ Hazard Type"]
+        direction LR
+        H2["Steep+Wet → Landslide"]
+        H3["Flat+Wet → Flash Flood"]
+        H4["Hot+Dry → Wildfire"]
+        H5["Seismic → Instability"]
+    end
+
+    H6["📊 JSON Response"]
+
+    D0 --> NODE1 --> D7 --> D8 --> D9 --> D10
+    D0 --> SEISMIC
+    D0 --> CASCADE
+    D10 --> H1
+    SEISMIC --> H1
+    CASCADE --> H1
+    H1 --> CALIBRATE --> CLASSIFY --> H6
+</pre>
+</div>
+
+<!-- DIAGRAM 5: Full System -->
+<h2>Phase 5: Full System Architecture</h2>
+<div class="diagram-wrap" id="d5">
+<pre class="mermaid">
+flowchart LR
+    subgraph DATA["Data Layer"]
+        DA["BIPAD Portal"]
+        DB["Google Earth Engine\n5 Satellite Sensors"]
+        DC["USGS Earthquake API"]
+        DD["Open-Meteo Weather"]
+    end
+
+    subgraph PROCESS["Processing Layer"]
+        PA["bipad_labeler.py\ngeocode + sampling"]
+        PB["extract_high_res_samples.py\n14-day × 10-feature\n500m resolution"]
+        PC["train_hazard_models.py\nRF, XGB, LSTM, Bi-LSTM"]
+    end
+
+    subgraph MODEL["AI Engine"]
+        MA["nepal_hazard_model_500m.h5\nTrained Bi-LSTM"]
+        MB["StandardScaler\nFitted at startup"]
+    end
+
+    subgraph SERVE["Serving Layer"]
+        SA["hazard_api.py\nFlask REST API :5002"]
+        SB["Sensor Fusion +\nCascade + Calibration"]
+    end
+
+    subgraph UI_LAYER["Frontend"]
+        UA["index.html\nInteractive Dashboard\nMap Click = Prediction"]
+    end
+
+    DA --> PA --> PB --> PC --> MA
+    DB --> PB
+    MA --> SA
+    MB --> SA
+    DB --> SB
+    DC --> SB
+    DD --> SB
+    SB --> SA --> UA
+</pre>
+</div>
+
+<!-- DIAGRAM 6: Bi-LSTM Architecture -->
+<h2>Bi-LSTM Neural Network Architecture</h2>
+<div class="diagram-wrap" id="d6">
+<pre class="mermaid">
+flowchart TD
+    I["Input: 14 timesteps × 10 features"]
+    L1F["→ Forward LSTM — 64 units"]
+    L1B["← Backward LSTM — 64 units"]
+    L1["Bidirectional Layer 1 — Output: 128"]
+    DR1["Dropout — 30%"]
+    L2F["→ Forward LSTM — 32 units"]
+    L2B["← Backward LSTM — 32 units"]
+    L2["Bidirectional Layer 2 — Output: 64"]
+    DR2["Dropout — 30%"]
+    D1["Dense — 16 neurons, ReLU"]
+    D2["Dense — 1 neuron, Sigmoid"]
+    O["Output: P_hazard ∈ 0 to 1"]
+
+    I --> L1F & L1B
+    L1F --> L1
+    L1B --> L1
+    L1 --> DR1
+    DR1 --> L2F & L2B
+    L2F --> L2
+    L2B --> L2
+    L2 --> DR2
+    DR2 --> D1 --> D2 --> O
+</pre>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    themeVariables: {
+      fontSize: '14px',
+      fontFamily: 'Segoe UI, sans-serif'
+    },
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+      curve: 'basis'
+    }
+  });
+</script>
+</body>
+</html>
