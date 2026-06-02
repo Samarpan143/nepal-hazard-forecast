@@ -15,6 +15,16 @@ def train_bilstm_model(csv_path):
     print(f"Loading high-resolution sequences from {csv_path}...")
     df = pd.read_csv(csv_path)
     
+    # Map from sample_id back to specific raw Hazard string, then map to 4-class integers
+    df_raw = pd.read_csv('sample_locations_raw.csv')
+    label_map = {
+        'Stable': 0,
+        'Landslide': 1,
+        'Flood': 2,
+        'Forest Fire': 3
+    }
+    df['multiclass_label'] = df['sample_id'].map(df_raw['Hazard']).map(label_map).fillna(0).astype(int)
+    
     time_steps = 14
     # Feature set: all 10 sensor channels extracted per timestep
     # soil = TerraClimate soil moisture (bilinear-upsampled from 4km to 500m during extraction)
@@ -36,13 +46,15 @@ def train_bilstm_model(csv_path):
             sample_seq.append(timestep_features)
         
         samples.append(sample_seq)
-        labels.append(row['label'])
+        labels.append(row['multiclass_label'])
         
     X = np.array(samples)
     y = np.array(labels)
     
     print(f"Data Shape: {X.shape}, Label Shape: {y.shape}")
-    print(f"Positive Samples (Hazards): {sum(y)}")
+    print("Class Counts:")
+    for label_val, label_name in [(0, 'Stable'), (1, 'Landslide'), (2, 'Flood'), (3, 'Forest Fire')]:
+        print(f"  {label_name}: {np.sum(y == label_val)}")
     
     # 2. Scale Features
     num_samples, ts, num_feats = X.shape
@@ -62,7 +74,16 @@ def train_bilstm_model(csv_path):
     counts = np.bincount(y_train)
     total = sum(counts)
     class_weight = {i: (1 / counts[i]) * (total / len(counts)) for i in range(len(counts))}
-    print(f"Class Weights: {class_weight}")
+    
+    # --- MINORITY CLASS RECALL BOOSTERS ---
+    # We apply a 2.5x boost to Floods (Class 2) and 2.0x to Fires (Class 3)
+    # to maximize recall safely alongside Focal Loss.
+    if 2 in class_weight:
+        class_weight[2] *= 2.5  # Boost flood importance by 2.5x
+    if 3 in class_weight:
+        class_weight[3] *= 2.0  # Boost fire importance by 2.0x
+        
+    print(f"Adjusted Class Weights for High Recall: {class_weight}")
     
     # Store all model results for comparison
     results = {}
@@ -157,11 +178,28 @@ def train_bilstm_model(csv_path):
     print(f"ROC-AUC: {results['LSTM (Unidirectional)']['auc']:.4f}")
     
     # =========================================================================
-    # PRIMARY MODEL: Bi-Directional LSTM
+    # PRIMARY MODEL: Bi-Directional LSTM (with Focal Loss)
     # =========================================================================
     print("\n" + "="*60)
-    print("PRIMARY: Bi-Directional LSTM")
+    print("PRIMARY: Bi-Directional LSTM (with Focal Loss)")
     print("="*60)
+    
+    # Custom Focal Loss for highly imbalanced multi-class time-series
+    def focal_loss(gamma=2.0, alpha=0.25):
+        def sparse_focal_loss(y_true, y_pred):
+            y_pred = tf.clip_by_value(y_pred, tf.keras.backend.epsilon(), 1.0 - tf.keras.backend.epsilon())
+            ce = tf.keras.losses.sparse_categorical_crossentropy(y_true, y_pred)
+            
+            y_true_flat = tf.reshape(tf.cast(y_true, tf.int32), [-1])
+            y_pred_flat = tf.reshape(y_pred, [-1, 4])
+            
+            y_true_one_hot = tf.one_hot(y_true_flat, depth=4)
+            p_t = tf.reduce_sum(y_true_one_hot * y_pred_flat, axis=-1)
+            weight = alpha * tf.pow(1.0 - p_t, gamma)
+            
+            loss_flat = weight * tf.reshape(ce, [-1])
+            return tf.reshape(loss_flat, tf.shape(y_true))
+        return sparse_focal_loss
     
     model = Sequential([
         Input(shape=(ts, num_feats)),
@@ -172,7 +210,7 @@ def train_bilstm_model(csv_path):
         Dense(16, activation='relu'),
         Dense(4, activation='softmax')
     ])
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer='adam', loss=focal_loss(gamma=2.0, alpha=0.25), metrics=['accuracy'])
     
     print("Training Bi-LSTM...")
     history = model.fit(

@@ -149,17 +149,25 @@ def run_prediction(lat, lon, location_name, model, scaler, silent=False, target_
         scaled_seq = scaler.transform(raw_seq)
         # Reshape to (1 sample, 14 timesteps, 10 features)
         input_tensor = scaled_seq.reshape(1, 14, 10)
-        prob = model.predict(input_tensor, verbose=0)[0][0]
+        preds = model.predict(input_tensor, verbose=0)[0]
+        # preds: [p_stable, p_landslide, p_flood, p_fire]
+        p_landslide = float(preds[1])
+        p_flood = float(preds[2])
+        p_fire = float(preds[3]) if len(preds) > 3 else 0.0
+        
+        max_prob = max(p_landslide, p_flood, p_fire)
 
         if not silent:
             print(f"--- Results for {location_name} ---")
-            print(f"Hazard Probability: {prob:.2%}")
-            if prob > 0.5:
+            print(f"Landslide Probability: {p_landslide:.2%}")
+            print(f"Flood Probability:     {p_flood:.2%}")
+            print(f"Wildfire Probability:  {p_fire:.2%}")
+            if max_prob > 0.5:
                 print("ALERT: High Risk")
             else:
                 print("LOW RISK")
 
-        return prob
+        return max_prob
     except Exception as e:
         if not silent:
             print(f"Prediction failed for {location_name}: {e}")

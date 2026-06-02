@@ -8,3 +8,6 @@ xgboost
 earthengine-api
 geopy
 python-dotenv
+flask
+flask-cors
+

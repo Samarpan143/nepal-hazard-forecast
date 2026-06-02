@@ -210,10 +210,11 @@ def run_prediction_core(lat, lon, target_date_obj):
         with model_lock:
             preds = model.predict(scaled, verbose=0)[0]
 
-        # Model output: [p_stable, p_hydro, p_fire, p_smog]
-        p_hydro = float(preds[1])
-        p_fire = float(preds[2])
-        p_smog = float(preds[3]) if len(preds) > 3 else 0.0
+        # Model output: [p_stable, p_landslide, p_flood, p_fire]
+        p_landslide = float(preds[1])
+        p_flood = float(preds[2])
+        p_fire = float(preds[3]) if len(preds) > 3 else 0.0
+        p_smog = 0.0  # Smog is handled purely by the physical failsafe below
 
         # Override wildfire probability if environmental conditions clearly indicate high risk
         # This corrects for the model's blindness to monthly-averaged temperature inputs
@@ -225,7 +226,9 @@ def run_prediction_core(lat, lon, target_date_obj):
         if is_hot and is_dry and is_water_stressed:
             p_fire = max(p_fire, 0.85)
 
-        final_prob = min(1.0, p_hydro + seismic_boost)
+        # Apply seismic trigger directly to landslide risk
+        p_landslide = min(1.0, p_landslide + seismic_boost)
+        final_prob = max(p_landslide, p_flood)
 
         hazard_type = "General Instability"
         reason = "Monitoring environment."
@@ -273,22 +276,24 @@ def run_prediction_core(lat, lon, target_date_obj):
                     with model_lock:
                         up_preds = model.predict(up_scaled, verbose=0)[0]
 
-                    up_prob = float(up_preds[1])  # upstream hydrological risk
+                    up_landslide_prob = float(up_preds[1])
+                    up_flood_prob = float(up_preds[2])
 
                     upstream_payload = {
-                        'landslide': up_prob,
+                        'landslide': up_landslide_prob,
+                        'flood': up_flood_prob,
                         'max_rain': max_rain,
                         'threat_dir': worst_node['dir'],
                         'slope': up_vals['Slope']
                     }
 
-                    if up_vals['Slope'] > 25.0 and up_prob > 0.6 and upstream_rain_total > 30:
-                        final_prob = max(final_prob, min(1.0, up_prob))
+                    if up_vals['Slope'] > 25.0 and up_landslide_prob > 0.6 and upstream_rain_total > 30:
+                        final_prob = max(final_prob, min(1.0, up_landslide_prob))
                         hazard_type = "Cascading Landslide-Flood (LDOF)"
                         reason = f"Severe landslide risk in steep {threat_dir} catchment. High risk of river damming and outburst flood."
                         time_lag = 4
-                    elif up_prob > 0.4 and upstream_rain_total > 40:
-                        final_prob = max(final_prob, min(1.0, up_prob))
+                    elif up_flood_prob > 0.4 and upstream_rain_total > 40:
+                        final_prob = max(final_prob, min(1.0, up_flood_prob))
                         hazard_type = "Cascading River Flood"
                         reason = f"Heavy rainfall in the {threat_dir} catchment. Expected impact downstream."
                         time_lag = 6
@@ -313,7 +318,6 @@ def run_prediction_core(lat, lon, target_date_obj):
 
         # Multi-hazard physical consistency filtering
         # Each hazard type has environmental pre-conditions that must be satisfied
-        hydro_prob = final_prob
         is_dry = local_rain_total < 15.0
         has_seismic_trigger = seismic_boost > 0.1
 
@@ -321,7 +325,7 @@ def run_prediction_core(lat, lon, target_date_obj):
         if is_dry and not has_seismic_trigger:
             landslide_score = 0.0
         else:
-            landslide_score = float(hydro_prob if vals['Slope'] > 12.0 else (0.0 if vals['Slope'] < 5.0 else hydro_prob * 0.1))
+            landslide_score = float(p_landslide if vals['Slope'] > 12.0 else (0.0 if vals['Slope'] < 5.0 else p_landslide * 0.1))
 
         # Flood requires meaningful local or upstream rainfall
         # Slope penalty only applies above 30° (cliff faces) — valley floors in Nepal
@@ -331,12 +335,12 @@ def run_prediction_core(lat, lon, target_date_obj):
             flood_score = 0.0
         else:
             if vals['Slope'] > 30.0 and local_rain_total <= 40.0 and upstream_rain_total <= 20.0:
-                flood_score = float(hydro_prob * 0.3)
+                flood_score = float(p_flood * 0.3)
             else:
-                flood_score = float(hydro_prob)
+                flood_score = float(p_flood)
 
         # Wildfire cannot occur in wet or high-moisture conditions
-        is_wet = local_rain_total > 30.0 or vals.get('NDMI', 0.5) > 0.3
+        is_wet = local_rain_total > 20.0 or vals.get('NDMI', 0.5) > 0.3
         if is_wet:
             fire_score = 0.0
         else:
@@ -360,7 +364,7 @@ def run_prediction_core(lat, lon, target_date_obj):
                 "reason": f"Severe landslide risk in steep {threat_dir} catchment. High risk of river damming and outburst flood."
             })
 
-        if landslide_score > 0.3:
+        if landslide_score > 0.15:
             if local_rain_total > 40 and vals['Slope'] > 15.0 and vals['NDVI'] < 0.25:
                 hazards.append({
                     "type": "Post-Fire / Barren-Land Debris Flow",
@@ -368,23 +372,23 @@ def run_prediction_core(lat, lon, target_date_obj):
                 })
                 landslide_score = max(landslide_score, 0.85)
                 final_prob = max(final_prob, 0.85)
-            elif local_rain_total > 30 and vals['Slope'] > 12.0 and not (hazard_type == "Cascading Landslide-Flood (LDOF)"):
+            elif local_rain_total > 15.0 and vals['Slope'] > 8.0 and not (hazard_type == "Cascading Landslide-Flood (LDOF)"):
                 hazards.append({
                     "type": "Landslide / Mudslide",
                     "reason": "High moisture accumulation in mountainous terrain."
                 })
 
-        if flood_score > 0.3:
+        if flood_score > 0.15:
             is_cascading = hazard_type in ["Cascading River Flood", "Cascading Landslide-Flood (LDOF)"]
             if not is_cascading:
-                # Local rain threshold lowered from 30mm to 25mm based on calibration
-                if local_rain_total > 25.0:
+                # Local rain threshold lowered to 15mm to avoid blocking AI predictions
+                if local_rain_total > 15.0:
                     hazards.append({
                         "type": "Flash Flood / Inundation",
                         "reason": "Rainfall pooling / Local river overflow."
                     })
                 # Upstream-only floods require a higher threshold to avoid false positives
-                elif upstream_rain_total > 40.0 and local_rain_total <= 25.0:
+                elif upstream_rain_total > 40.0 and local_rain_total <= 15.0:
                     hazards.append({
                         "type": "Flash Flood / Inundation",
                         "reason": f"Upstream catchment rainfall ({upstream_rain_total:.0f}mm) detected. High risk of river overflow from headwater or glacier run-off."
