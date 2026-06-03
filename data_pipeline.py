@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # 1. Initialize Earth Engine Server
-PROJECT_ID = os.getenv('PROJECT_ID', 'nd-sem-project') # Change this to your active GCP Project ID if needed
+PROJECT_ID = os.getenv('PROJECT_ID', 'satellite-hazard-detetcion') # Change this to your active GCP Project ID if needed
 
 def initialize_gee():
     try:

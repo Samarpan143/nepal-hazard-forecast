@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize GEE
-PROJECT_ID = os.getenv('PROJECT_ID', 'nd-sem-project')
+PROJECT_ID = os.getenv('PROJECT_ID', 'satellite-hazard-detetcion')
 ee.Initialize(project=PROJECT_ID)
 
 def get_static_topography():

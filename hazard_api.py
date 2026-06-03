@@ -17,7 +17,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-PROJECT_ID = os.getenv('PROJECT_ID', 'nd-sem-project')
+PROJECT_ID = os.getenv('PROJECT_ID', 'satellite-hazard-detetcion')
 ee.Initialize(project=PROJECT_ID)
 
 # Load model and fit scaler once at startup to avoid repeated overhead

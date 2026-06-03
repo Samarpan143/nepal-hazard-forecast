@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 # Initialize environment and Google Earth Engine
 load_dotenv()
-PROJECT_ID = os.getenv('PROJECT_ID', 'nd-sem-project')
+PROJECT_ID = os.getenv('PROJECT_ID', 'satellite-hazard-detetcion')
 try:
     ee.Initialize(project=PROJECT_ID)
     print(f"Earth Engine initialized: {PROJECT_ID}")
