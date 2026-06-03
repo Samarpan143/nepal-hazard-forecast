@@ -28,7 +28,7 @@ def verify_and_report():
     df = pd.read_csv(DATA_CACHE, index_col='Date', parse_dates=True)
     
     # 3. Correlation with Real Events
-    print("--- Scientific Correlation: Environmental Anomalies on Disaster Dates ---")
+    print("Scientific Correlation: Environmental Anomalies on Disaster Dates")
     
     report_rows = []
     for date_str, event_name in REAL_WORLD_EVENTS.items():

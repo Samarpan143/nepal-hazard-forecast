@@ -1,12 +1,3 @@
-"""
-Comprehensive BIPAD Backtesting Script (Full Geocoded Data)
-Tests the fixed hazard prediction system against ALL geocoded BIPAD ground-truth 
-incidents (Landslide + Flood) using the live API.
-
-Uses the pre-geocoded bipad_labels_with_coords.csv (873 incidents).
-Stratified sampling to keep runtime manageable while covering diverse cases.
-"""
-
 import pandas as pd
 import numpy as np
 import datetime
@@ -16,9 +7,8 @@ import requests
 import sys
 
 API_URL = "http://127.0.0.1:5002/predict_area"
-TIMEOUT = 120  # seconds per API call (GEE can be slow)
+TIMEOUT = 120
 
-# How many to test per hazard type (set to a large number to test all)
 SAMPLE_SIZE = int(sys.argv[1]) if len(sys.argv) > 1 else 50
 
 
@@ -45,14 +35,6 @@ def call_api(lat, lon, date_str, retries=2):
 
 
 def classify_result(api_resp, expected_hazard):
-    """Classify an API response against the expected BIPAD hazard type.
-    
-    Returns:
-        detected: bool - was the right hazard type found?
-        elevated: bool - was probability > 0.3 (any hazard)?
-        prob: float - raw probability
-        hazards: list - detected hazard type names
-    """
     if api_resp is None:
         return False, False, 0.0, []
     
@@ -76,11 +58,9 @@ def classify_result(api_resp, expected_hazard):
 
 
 def run_backtest():
-    print("=" * 100)
-    print("🔬 COMPREHENSIVE BIPAD BACKTESTING — Nepal Multi-Hazard Early Warning System")
+    print("\n🔬 COMPREHENSIVE BIPAD BACKTESTING — Nepal Multi-Hazard Early Warning System")
     print(f"   Testing against geocoded BIPAD ground-truth incidents (2021–2023)")
     print(f"   Sample size per hazard type: {SAMPLE_SIZE}")
-    print("=" * 100)
     
     # Load geocoded BIPAD data
     df = pd.read_csv('bipad_labels_with_coords.csv')
@@ -98,13 +78,11 @@ def run_backtest():
         n_available = len(subset)
         n_sample = min(SAMPLE_SIZE, n_available)
         
-        # Stratified sample: ensure we get incidents across different months/districts
+        #ensure we get incidents across different months/districts
         sampled = subset.sample(n=n_sample, random_state=42)
         
-        print(f"\n{'='*100}")
         emoji_map = {'Landslide': '⛰️  LANDSLIDE', 'Flood': '🌊 FLOOD', 'Forest Fire': '🔥 FOREST FIRE'}
-        print(f"{emoji_map.get(hazard_type, '⚠️ HAZARD')} — Testing {n_sample}/{n_available} incidents")
-        print(f"{'='*100}")
+        print(f"\n{emoji_map.get(hazard_type, '⚠️ HAZARD')} — Testing {n_sample}/{n_available} incidents")
         
         results = []
         tested = 0
@@ -179,7 +157,7 @@ def run_backtest():
         if errors > 0:
             print(f"     API errors: {errors}")
     
-    # --- OVERALL SUMMARY ---
+    # Overall summary logic
     total_tested = sum(r['tested'] for r in all_results.values())
     total_detected = sum(r['detected'] for r in all_results.values())
     total_elevated = sum(r['elevated_count'] for r in all_results.values())
@@ -187,23 +165,15 @@ def run_backtest():
     overall_rate = round(total_detected / total_tested * 100, 1) if total_tested > 0 else 0
     overall_elevated = round(total_elevated / total_tested * 100, 1) if total_tested > 0 else 0
     
-    print("\n" + "=" * 100)
-    print("📋 OVERALL BACKTESTING SUMMARY")
-    print("=" * 100)
+    print("\n📋 OVERALL BACKTESTING SUMMARY")
     print(f"{'Hazard':<20} {'BIPAD Total':<15} {'Tested':<10} {'Detected':<12} {'Det. Rate':<12} {'Elevated':<15} {'Elev. Rate':<12}")
-    print("-" * 96)
     for name, r in all_results.items():
         print(f"{name:<20} {r['total_available']:<15} {r['tested']:<10} {r['detected']:<12} {r['detection_rate']}%{'':<7} {r['elevated_count']}/{r['tested']}{'':<8} {r['elevated_rate']}%")
-    print("-" * 96)
     print(f"{'OVERALL':<20} {'':<15} {total_tested:<10} {total_detected:<12} {overall_rate}%{'':<7} {total_elevated}/{total_tested}{'':<8} {overall_elevated}%")
     if total_errors > 0:
         print(f"API errors: {total_errors}")
-    print("=" * 100)
-    
-    # --- FALSE NEGATIVE ANALYSIS ---
-    print("\n" + "=" * 100)
-    print("🔍 FALSE NEGATIVE ANALYSIS (Missed Incidents)")
-    print("=" * 100)
+    # False negative analysis
+    print("\n🔍 FALSE NEGATIVE ANALYSIS (Missed Incidents)")
     
     missed = []
     for name, r in all_results.items():

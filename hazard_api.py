@@ -113,7 +113,7 @@ def get_realtime_data(lat, lon, target_date_obj):
         srtm.subtract(srtm.focal_mean(300, 'circle', 'meters')).rename('TPI')
     ]).reduceRegion(ee.Reducer.mean(), geom, 30).getInfo()
 
-    # Surface temperature from MODIS LST — raw values (range 0-15767) to match training
+    # Surface temperature from MODIS LST — raw values
     lst_coll = ee.ImageCollection('MODIS/061/MOD11A1').filterBounds(geom).filterDate(ee_start_date, ee_end_date)
     lst_val = lst_coll.mean().select('LST_Day_1km').reduceRegion(ee.Reducer.mean(), geom, 1000).getInfo().get('LST_Day_1km', 15200.0)
 
@@ -132,7 +132,7 @@ def get_realtime_data(lat, lon, target_date_obj):
         aod_val = aod_info.get('Optical_Depth_047', 100)
         aod_scaled = float(aod_val) / 1000.0
 
-    # NDMI from MODIS surface reflectance — better moisture indicator than NDVI alone
+    # NDMI from MODIS surface reflectance for better moisture indicator than NDVI alone
     ndmi_coll = ee.ImageCollection('MODIS/061/MOD09A1').filterBounds(geom).filterDate(ee_start_date, ee_end_date)
     ndmi_scaled = 0.5  # neutral default
     if ndmi_coll.size().getInfo() > 0:
@@ -147,7 +147,7 @@ def get_realtime_data(lat, lon, target_date_obj):
     # Daily rainfall from Open-Meteo for temporal sequence injection
     rain_list = get_open_meteo_rain_list(lat, lon, target_date_obj)
 
-    # Monthly pr and soil from TerraClimate — matches the training data source
+    # Monthly pr and soil from TerraClimate
     tc_start = ee_end_date.advance(-1, 'month')
     tc_end = ee_end_date.advance(1, 'month')
     tc = ee.ImageCollection('IDAHO_EPSCOR/TERRACLIMATE') \
@@ -218,7 +218,7 @@ def run_prediction_core(lat, lon, target_date_obj):
 
         # Override wildfire probability if environmental conditions clearly indicate high risk
         # This corrects for the model's blindness to monthly-averaged temperature inputs
-        is_hot = vals['LST'] > 14800       # roughly above 22.8°C
+        is_hot = vals['LST'] > 14800      
         recent_rain = sum(vals['rain_list'])
         is_dry = recent_rain < 10.0
         is_water_stressed = vals.get('NDMI', 0.5) < 0.15
@@ -317,7 +317,6 @@ def run_prediction_core(lat, lon, target_date_obj):
         print(f"DIAGNOSTIC - FINAL CALIBRATED PROB: {final_prob*100:.1f}%")
 
         # Multi-hazard physical consistency filtering
-        # Each hazard type has environmental pre-conditions that must be satisfied
         is_dry = local_rain_total < 15.0
         has_seismic_trigger = seismic_boost > 0.1
 
@@ -328,7 +327,7 @@ def run_prediction_core(lat, lon, target_date_obj):
             landslide_score = float(p_landslide if vals['Slope'] > 12.0 else (0.0 if vals['Slope'] < 5.0 else p_landslide * 0.1))
 
         # Flood requires meaningful local or upstream rainfall
-        # Slope penalty only applies above 30° (cliff faces) — valley floors in Nepal
+        # Slope penalty only applies above 30° (cliff faces)  valley floors in Nepal
         # are typically 15-25° and should receive full flood scores
         is_wet_enough_for_flood = (local_rain_total > 20.0 or upstream_rain_total > 20.0)
         if not is_wet_enough_for_flood:

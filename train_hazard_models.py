@@ -15,7 +15,7 @@ def train_bilstm_model(csv_path):
     print(f"Loading high-resolution sequences from {csv_path}...")
     df = pd.read_csv(csv_path)
     
-    # Map from sample_id back to specific raw Hazard string, then map to 4-class integers
+    # Map text labels to integers (0=Stable, 1=Landslide, 2=Flood, 3=Fire)
     df_raw = pd.read_csv('sample_locations_raw.csv')
     label_map = {
         'Stable': 0,
@@ -26,11 +26,10 @@ def train_bilstm_model(csv_path):
     df['multiclass_label'] = df['sample_id'].map(df_raw['Hazard']).map(label_map).fillna(0).astype(int)
     
     time_steps = 14
-    # Feature set: all 10 sensor channels extracted per timestep
-    # soil = TerraClimate soil moisture (bilinear-upsampled from 4km to 500m during extraction)
+    # The 11 environmental features we extract for each day
     base_features = ['VV', 'VH', 'NDVI', 'NDMI', 'Aerosol', 'LST', 'pr', 'soil', 'Slope', 'Aspect', 'TPI']
     
-    # 1. Reshape into 3D: (Samples, 7, 10)
+    # Reshape the flat CSV data into 3D sequences for the LSTM
     samples = []
     labels = []
     
@@ -56,28 +55,26 @@ def train_bilstm_model(csv_path):
     for label_val, label_name in [(0, 'Stable'), (1, 'Landslide'), (2, 'Flood'), (3, 'Forest Fire')]:
         print(f"  {label_name}: {np.sum(y == label_val)}")
     
-    # 2. Scale Features
+    # Standardize features so they are all on the same scale
     num_samples, ts, num_feats = X.shape
     X_flat = X.reshape(-1, num_feats)
     scaler = StandardScaler()
     X_scaled_flat = scaler.fit_transform(X_flat)
     X_scaled = X_scaled_flat.reshape(num_samples, ts, num_feats)
     
-    # 3. Train/Test Split (same split for ALL models for fair comparison)
+    # Split 80% for training and 20% for testing
     X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
     
-    # Flatten 3D -> 2D for tree-based baselines (samples, 70 features)
+    # Tree models like Random Forest need 2D data, not 3D sequences
     X_train_flat = X_train.reshape(X_train.shape[0], -1)
     X_test_flat = X_test.reshape(X_test.shape[0], -1)
     
-    # 4. Class Weights
+    # Calculate base class weights to handle natural class imbalance
     counts = np.bincount(y_train)
     total = sum(counts)
     class_weight = {i: (1 / counts[i]) * (total / len(counts)) for i in range(len(counts))}
     
-    # --- MINORITY CLASS RECALL BOOSTERS ---
-    # We apply a 2.5x boost to Floods (Class 2) and 2.0x to Fires (Class 3)
-    # to maximize recall safely alongside Focal Loss.
+    # Artificially boost the importance of floods and fires so the model doesn't ignore them
     if 2 in class_weight:
         class_weight[2] *= 2.5  # Boost flood importance by 2.5x
     if 3 in class_weight:
@@ -85,15 +82,11 @@ def train_bilstm_model(csv_path):
         
     print(f"Adjusted Class Weights for High Recall: {class_weight}")
     
-    # Store all model results for comparison
+    # Dictionary to keep track of how each model performs
     results = {}
     
-    # =========================================================================
-    # BASELINE 1: Random Forest (no temporal awareness)
-    # =========================================================================
-    print("\n" + "="*60)
-    print("BASELINE 1: Random Forest Classifier")
-    print("="*60)
+    # Train Baseline 1: Random Forest
+    print("\nBASELINE 1: Random Forest Classifier")
     rf = RandomForestClassifier(n_estimators=200, random_state=42, class_weight='balanced')
     rf.fit(X_train_flat, y_train)
     rf_pred = rf.predict(X_test_flat)
@@ -109,14 +102,10 @@ def train_bilstm_model(csv_path):
     print(classification_report(y_test, rf_pred))
     print(f"ROC-AUC: {results['Random Forest']['auc']:.4f}")
     
-    # =========================================================================
-    # BASELINE 2: XGBoost / Gradient Boosting (no temporal awareness)  
-    # =========================================================================
-    print("\n" + "="*60)
-    print("BASELINE 2: Gradient Boosting (XGBoost-style)")
-    print("="*60)
+    # Train Baseline 2: Gradient Boosting
+    print("\nBASELINE 2: Gradient Boosting (XGBoost-style)")
     
-    # Try XGBoost if available, fall back to sklearn GradientBoosting
+    # Attempt to use XGBoost, but fall back to Sklearn if not installed
     try:
         from xgboost import XGBClassifier
         xgb = XGBClassifier(
@@ -145,12 +134,8 @@ def train_bilstm_model(csv_path):
     print(classification_report(y_test, xgb_pred))
     print(f"ROC-AUC: {results[model_name]['auc']:.4f}")
     
-    # =========================================================================
-    # BASELINE 3: Unidirectional LSTM (temporal, but forward-only)
-    # =========================================================================
-    print("\n" + "="*60)
-    print("BASELINE 3: Unidirectional LSTM")
-    print("="*60)
+    # Train Baseline 3: Standard LSTM
+    print("\nBASELINE 3: Unidirectional LSTM")
     
     lstm_model = Sequential([
         Input(shape=(ts, num_feats)),
@@ -177,14 +162,10 @@ def train_bilstm_model(csv_path):
     print(classification_report(y_test, lstm_pred))
     print(f"ROC-AUC: {results['LSTM (Unidirectional)']['auc']:.4f}")
     
-    # =========================================================================
-    # PRIMARY MODEL: Bi-Directional LSTM (with Focal Loss)
-    # =========================================================================
-    print("\n" + "="*60)
-    print("PRIMARY: Bi-Directional LSTM (with Focal Loss)")
-    print("="*60)
+    # Train Primary Model: Bi-Directional LSTM
+    print("\nPRIMARY: Bi-Directional LSTM (with Focal Loss)")
     
-    # Custom Focal Loss for highly imbalanced multi-class time-series
+    # Custom focal loss function to penalize easy predictions and focus on hard mistakes
     def focal_loss(gamma=2.0, alpha=0.25):
         def sparse_focal_loss(y_true, y_pred):
             y_pred = tf.clip_by_value(y_pred, tf.keras.backend.epsilon(), 1.0 - tf.keras.backend.epsilon())
@@ -234,23 +215,18 @@ def train_bilstm_model(csv_path):
     print(classification_report(y_test, y_pred))
     print(f"ROC-AUC: {results['Bi-LSTM']['auc']:.4f}")
     
-    # =========================================================================
-    # COMPARISON TABLE
-    # =========================================================================
-    print("\n" + "="*70)
-    print("MODEL COMPARISON TABLE")
-    print("="*70)
+    # Print the final comparison table
+    print("\nMODEL COMPARISON TABLE")
     print(f"{'Model':<25} {'Accuracy':>10} {'Precision':>10} {'Recall':>10} {'F1':>10} {'AUC':>10}")
-    print("-"*75)
     for name, metrics in results.items():
         print(f"{name:<25} {metrics['accuracy']:>10.4f} {metrics['precision']:>10.4f} {metrics['recall']:>10.4f} {metrics['f1']:>10.4f} {metrics['auc']:>10.4f}")
     
-    # Save comparison results
+    # Save metrics to JSON for later use
     with open('model_comparison_results.json', 'w') as f:
         json.dump(results, f, indent=2)
     print("\nComparison saved to model_comparison_results.json")
     
-    # Confusion Matrix for Bi-LSTM
+    # Plot and save the confusion matrix
     cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(8,6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
@@ -259,7 +235,7 @@ def train_bilstm_model(csv_path):
     plt.xlabel('Predicted')
     plt.savefig('confusion_matrix_500m.png')
     
-    # Save Bi-LSTM model
+    # Export the trained Bi-LSTM weights
     model.save('nepal_hazard_model_500m.h5')
     print("Bi-LSTM model and plots saved.")
 

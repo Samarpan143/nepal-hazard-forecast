@@ -158,7 +158,7 @@ def run_prediction(lat, lon, location_name, model, scaler, silent=False, target_
         max_prob = max(p_landslide, p_flood, p_fire)
 
         if not silent:
-            print(f"--- Results for {location_name} ---")
+            print(f"Results for {location_name}:")
             print(f"Landslide Probability: {p_landslide:.2%}")
             print(f"Flood Probability:     {p_flood:.2%}")
             print(f"Wildfire Probability:  {p_fire:.2%}")
@@ -176,9 +176,7 @@ def run_prediction(lat, lon, location_name, model, scaler, silent=False, target_
 
 def check_cascading_risk(valley_lat, valley_lon, hill_lat, hill_lon, model, scaler, date_str):
     """Evaluates whether upstream landslide risk will amplify downstream flood risk."""
-    print("\n" + "=" * 50)
-    print(f"CASCADING RISK ANALYSIS — {date_str}")
-    print("=" * 50)
+    print(f"\nCASCADING RISK ANALYSIS — {date_str}")
 
     # Step 1: upstream hillside — potential debris source
     print("Step 1: Analyzing upstream hillside for landslide risk...")
@@ -194,7 +192,7 @@ def check_cascading_risk(valley_lat, valley_lon, hill_lat, hill_lon, model, scal
         cascade_bonus = hill_prob * 0.5
         final_valley_risk = min(1.0, valley_prob + cascade_bonus)
 
-    print(f"\n--- Cascade Report ---")
+    print(f"\nCascade Report:")
     print(f"Hillside (source) risk:     {hill_prob:.2%}")
     print(f"Valley (direct) risk:       {valley_prob:.2%}")
     print(f"Final propagated risk:      {final_valley_risk:.2%}")

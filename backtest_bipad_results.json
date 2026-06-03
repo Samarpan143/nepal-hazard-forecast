@@ -1,22 +1,22 @@
 {
-  "timestamp": "2026-06-02T18:38:22.904915",
+  "timestamp": "2026-06-03T05:03:26.961615",
   "sample_size_per_type": 50,
   "overall": {
     "total_tested": 150,
-    "total_detected": 108,
-    "overall_detection_rate": 72.0,
-    "total_elevated": 130,
-    "overall_elevated_rate": 86.7,
+    "total_detected": 100,
+    "overall_detection_rate": 66.7,
+    "total_elevated": 131,
+    "overall_elevated_rate": 87.3,
     "total_errors": 0
   },
   "per_hazard": {
     "Landslide": {
       "bipad_total": 664,
       "tested": 50,
-      "detected": 33,
-      "detection_rate": 66.0,
-      "elevated_count": 43,
-      "elevated_rate": 86.0,
+      "detected": 40,
+      "detection_rate": 80.0,
+      "elevated_count": 44,
+      "elevated_rate": 88.0,
       "details": [
         {
           "location": "Sirijangha, Taplejung",
@@ -25,7 +25,7 @@
           "lon": 87.96349000000004,
           "probability": 85.0,
           "rain_14day": 125.9,
-          "slope": 59.8,
+          "slope": 19.7,
           "predicted_hazards": [
             "Post-Fire / Barren-Land Debris Flow"
           ],
@@ -39,9 +39,9 @@
           "date": "2022-06-18",
           "lat": 28.31097000000005,
           "lon": 84.24882000000008,
-          "probability": 57.4,
-          "rain_14day": 216.7,
-          "slope": 20.7,
+          "probability": 63.9,
+          "rain_14day": 174.6,
+          "slope": 23.5,
           "predicted_hazards": [
             "Landslide / Mudslide",
             "Flash Flood / Inundation"
@@ -56,9 +56,9 @@
           "date": "2021-07-29",
           "lat": 27.426410000000036,
           "lon": 85.91784000000007,
-          "probability": 61.8,
-          "rain_14day": 230.5,
-          "slope": 27.0,
+          "probability": 66.2,
+          "rain_14day": 226.8,
+          "slope": 35.7,
           "predicted_hazards": [
             "Landslide / Mudslide",
             "Flash Flood / Inundation"
@@ -73,9 +73,9 @@
           "date": "2022-07-23",
           "lat": 27.80278000000004,
           "lon": 84.58055000000007,
-          "probability": 62.7,
+          "probability": 58.9,
           "rain_14day": 293.7,
-          "slope": 37.3,
+          "slope": 22.0,
           "predicted_hazards": [
             "Landslide / Mudslide",
             "Flash Flood / Inundation"
@@ -90,11 +90,12 @@
           "date": "2021-08-28",
           "lat": 28.878270000000043,
           "lon": 80.58259000000004,
-          "probability": 59.6,
+          "probability": 63.0,
           "rain_14day": 139.6,
           "slope": 23.9,
           "predicted_hazards": [
-            "Landslide / Mudslide"
+            "Landslide / Mudslide",
+            "Flash Flood / Inundation"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -106,13 +107,13 @@
           "date": "2021-10-19",
           "lat": 26.93790000000007,
           "lon": 87.65494000000007,
-          "probability": 42.5,
+          "probability": 34.9,
           "rain_14day": 349.6,
-          "slope": 8.5,
+          "slope": 29.9,
           "predicted_hazards": [
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": false,
+          "exact_match": true,
           "elevated_risk": true,
           "deaths": 1,
           "status": "tested"
@@ -122,7 +123,7 @@
           "date": "2021-05-29",
           "lat": 28.20806000000005,
           "lon": 83.98452000000003,
-          "probability": 54.3,
+          "probability": 46.7,
           "rain_14day": 182.8,
           "slope": 2.3,
           "predicted_hazards": [
@@ -138,12 +139,11 @@
           "date": "2021-08-05",
           "lat": 28.612720000000024,
           "lon": 82.47214000000008,
-          "probability": 62.8,
+          "probability": 69.3,
           "rain_14day": 183.4,
           "slope": 37.5,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -157,7 +157,7 @@
           "lon": 85.42667000000006,
           "probability": 85.0,
           "rain_14day": 183.5,
-          "slope": 26.0,
+          "slope": 24.5,
           "predicted_hazards": [
             "Post-Fire / Barren-Land Debris Flow",
             "Flash Flood / Inundation"
@@ -172,9 +172,9 @@
           "date": "2022-09-17",
           "lat": 28.92739000000006,
           "lon": 80.74607000000003,
-          "probability": 66.5,
-          "rain_14day": 430.8,
-          "slope": 21.3,
+          "probability": 63.6,
+          "rain_14day": 449.7,
+          "slope": 28.6,
           "predicted_hazards": [
             "Landslide / Mudslide",
             "Flash Flood / Inundation"
@@ -189,12 +189,11 @@
           "date": "2022-09-20",
           "lat": 28.293540000000064,
           "lon": 82.48467000000005,
-          "probability": 64.1,
+          "probability": 64.6,
           "rain_14day": 106.0,
           "slope": 34.2,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -206,7 +205,7 @@
           "date": "2021-08-29",
           "lat": 28.65372000000008,
           "lon": 81.45104000000003,
-          "probability": 64.1,
+          "probability": 60.6,
           "rain_14day": 233.7,
           "slope": 27.6,
           "predicted_hazards": [
@@ -223,15 +222,12 @@
           "date": "2021-10-20",
           "lat": 29.39867000000004,
           "lon": 81.28290000000004,
-          "probability": 45.5,
-          "rain_14day": 263.3,
-          "slope": 15.6,
-          "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
-          ],
-          "exact_match": true,
-          "elevated_risk": true,
+          "probability": 13.4,
+          "rain_14day": 218.9,
+          "slope": 24.4,
+          "predicted_hazards": [],
+          "exact_match": false,
+          "elevated_risk": false,
           "deaths": 1,
           "status": "tested"
         },
@@ -240,12 +236,11 @@
           "date": "2022-08-07",
           "lat": 28.402390000000025,
           "lon": 82.50796000000008,
-          "probability": 65.5,
+          "probability": 69.8,
           "rain_14day": 180.9,
           "slope": 35.8,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -257,12 +252,11 @@
           "date": "2022-07-28",
           "lat": 28.402390000000025,
           "lon": 82.50796000000008,
-          "probability": 62.0,
+          "probability": 66.8,
           "rain_14day": 96.7,
           "slope": 35.8,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -274,9 +268,9 @@
           "date": "2022-10-06",
           "lat": 27.722830000000044,
           "lon": 85.17161000000004,
-          "probability": 8.6,
-          "rain_14day": 256.4,
-          "slope": 20.4,
+          "probability": 14.8,
+          "rain_14day": 185.3,
+          "slope": 16.3,
           "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
@@ -288,9 +282,9 @@
           "date": "2022-10-07",
           "lat": 27.686960000000056,
           "lon": 85.23522000000008,
-          "probability": 21.7,
+          "probability": 17.4,
           "rain_14day": 164.6,
-          "slope": 6.9,
+          "slope": 3.0,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -304,11 +298,12 @@
           "date": "2022-07-31",
           "lat": 27.70028000000008,
           "lon": 84.06548000000004,
-          "probability": 45.3,
+          "probability": 57.2,
           "rain_14day": 282.5,
           "slope": 18.2,
           "predicted_hazards": [
-            "Landslide / Mudslide"
+            "Landslide / Mudslide",
+            "Flash Flood / Inundation"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -320,12 +315,11 @@
           "date": "2022-07-26",
           "lat": 27.8639717,
           "lon": 84.9144974,
-          "probability": 64.5,
-          "rain_14day": 182.3,
-          "slope": 28.9,
+          "probability": 70.6,
+          "rain_14day": 129.8,
+          "slope": 38.8,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -337,7 +331,7 @@
           "date": "2022-08-24",
           "lat": 27.67680000000007,
           "lon": 84.43589000000009,
-          "probability": 55.1,
+          "probability": 63.2,
           "rain_14day": 33.8,
           "slope": 1.4,
           "predicted_hazards": [
@@ -353,9 +347,9 @@
           "date": "2022-09-07",
           "lat": 26.75279000000006,
           "lon": 87.15755000000007,
-          "probability": 36.1,
+          "probability": 60.6,
           "rain_14day": 179.1,
-          "slope": 1.9,
+          "slope": 1.0,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -369,9 +363,9 @@
           "date": "2021-09-01",
           "lat": 28.20806000000005,
           "lon": 83.98452000000003,
-          "probability": 52.0,
+          "probability": 56.3,
           "rain_14day": 672.4,
-          "slope": 0.9,
+          "slope": 4.7,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -385,7 +379,7 @@
           "date": "2022-06-15",
           "lat": 27.93548000000004,
           "lon": 84.22325000000006,
-          "probability": 60.5,
+          "probability": 66.6,
           "rain_14day": 136.3,
           "slope": 39.8,
           "predicted_hazards": [
@@ -402,12 +396,11 @@
           "date": "2021-09-29",
           "lat": 29.741630000000043,
           "lon": 80.84767000000005,
-          "probability": 58.7,
-          "rain_14day": 109.1,
-          "slope": 45.1,
+          "probability": 57.1,
+          "rain_14day": 138.1,
+          "slope": 41.9,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -419,7 +412,7 @@
           "date": "2021-06-15",
           "lat": 27.74682000000007,
           "lon": 84.75988000000007,
-          "probability": 64.7,
+          "probability": 67.0,
           "rain_14day": 189.7,
           "slope": 37.1,
           "predicted_hazards": [
@@ -436,14 +429,15 @@
           "date": "2021-10-20",
           "lat": 29.04137000000003,
           "lon": 81.85773000000006,
-          "probability": 25.8,
+          "probability": 63.0,
           "rain_14day": 172.7,
           "slope": 25.3,
           "predicted_hazards": [
+            "Landslide / Mudslide",
             "Flash Flood / Inundation"
           ],
-          "exact_match": false,
-          "elevated_risk": false,
+          "exact_match": true,
+          "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
         },
@@ -452,13 +446,14 @@
           "date": "2021-07-08",
           "lat": 27.90138000000007,
           "lon": 84.22744000000006,
-          "probability": 73.4,
+          "probability": 60.9,
           "rain_14day": 359.6,
-          "slope": 24.8,
+          "slope": 18.6,
           "predicted_hazards": [
+            "Landslide / Mudslide",
             "Flash Flood / Inundation"
           ],
-          "exact_match": false,
+          "exact_match": true,
           "elevated_risk": true,
           "deaths": 1,
           "status": "tested"
@@ -468,9 +463,9 @@
           "date": "2022-07-10",
           "lat": 29.158830000000023,
           "lon": 81.66961000000003,
-          "probability": 58.2,
+          "probability": 68.3,
           "rain_14day": 201.8,
-          "slope": 40.2,
+          "slope": 45.5,
           "predicted_hazards": [
             "Landslide / Mudslide"
           ],
@@ -484,7 +479,7 @@
           "date": "2021-10-20",
           "lat": 29.45771000000008,
           "lon": 81.21321000000006,
-          "probability": 40.1,
+          "probability": 64.2,
           "rain_14day": 319.0,
           "slope": 36.1,
           "predicted_hazards": [
@@ -501,14 +496,14 @@
           "date": "2022-09-24",
           "lat": 27.70028000000008,
           "lon": 84.06548000000004,
-          "probability": 24.8,
+          "probability": 40.2,
           "rain_14day": 161.7,
-          "slope": 18.7,
+          "slope": 18.2,
           "predicted_hazards": [
-            "Landslide / Mudslide"
+            "Cascading Landslide-Flood (LDOF)"
           ],
           "exact_match": true,
-          "elevated_risk": false,
+          "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
         },
@@ -517,7 +512,7 @@
           "date": "2021-06-18",
           "lat": 29.686690000000056,
           "lon": 81.27845000000008,
-          "probability": 55.5,
+          "probability": 54.4,
           "rain_14day": 303.8,
           "slope": 36.9,
           "predicted_hazards": [
@@ -534,7 +529,7 @@
           "date": "2021-07-01",
           "lat": 28.061280000000068,
           "lon": 84.04733000000004,
-          "probability": 65.5,
+          "probability": 57.6,
           "rain_14day": 437.0,
           "slope": 19.6,
           "predicted_hazards": [
@@ -551,14 +546,12 @@
           "date": "2021-05-20",
           "lat": 29.60326000000003,
           "lon": 80.70177000000007,
-          "probability": 33.4,
-          "rain_14day": 73.7,
-          "slope": 2.1,
-          "predicted_hazards": [
-            "Flash Flood / Inundation"
-          ],
+          "probability": 8.0,
+          "rain_14day": 72.3,
+          "slope": 26.0,
+          "predicted_hazards": [],
           "exact_match": false,
-          "elevated_risk": true,
+          "elevated_risk": false,
           "deaths": 0,
           "status": "tested"
         },
@@ -567,9 +560,9 @@
           "date": "2022-08-31",
           "lat": 27.67680000000007,
           "lon": 84.43589000000009,
-          "probability": 56.7,
+          "probability": 60.1,
           "rain_14day": 102.3,
-          "slope": 1.4,
+          "slope": 2.3,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -583,12 +576,11 @@
           "date": "2022-08-31",
           "lat": 28.31015000000008,
           "lon": 83.71883000000008,
-          "probability": 65.2,
+          "probability": 69.2,
           "rain_14day": 212.2,
           "slope": 30.8,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -600,11 +592,12 @@
           "date": "2022-09-13",
           "lat": 27.22121000000004,
           "lon": 87.79430000000008,
-          "probability": 51.7,
-          "rain_14day": 194.7,
-          "slope": 18.7,
+          "probability": 65.3,
+          "rain_14day": 174.0,
+          "slope": 29.5,
           "predicted_hazards": [
-            "Landslide / Mudslide"
+            "Landslide / Mudslide",
+            "Flash Flood / Inundation"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -616,13 +609,14 @@
           "date": "2022-09-26",
           "lat": 28.844340000000045,
           "lon": 81.71011000000004,
-          "probability": 62.0,
-          "rain_14day": 226.4,
-          "slope": 13.1,
+          "probability": 44.5,
+          "rain_14day": 221.6,
+          "slope": 16.6,
           "predicted_hazards": [
-            "Cascading River Flood"
+            "Landslide / Mudslide",
+            "Flash Flood / Inundation"
           ],
-          "exact_match": false,
+          "exact_match": true,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -632,12 +626,11 @@
           "date": "2021-06-15",
           "lat": 27.97621000000004,
           "lon": 83.95355000000006,
-          "probability": 60.7,
-          "rain_14day": 230.8,
-          "slope": 33.0,
+          "probability": 64.7,
+          "rain_14day": 324.8,
+          "slope": 28.3,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -649,13 +642,13 @@
           "date": "2022-10-11",
           "lat": 29.360340000000065,
           "lon": 81.32408000000004,
-          "probability": 51.9,
+          "probability": 51.6,
           "rain_14day": 279.3,
-          "slope": 16.7,
+          "slope": 67.2,
           "predicted_hazards": [
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": false,
+          "exact_match": true,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -665,9 +658,9 @@
           "date": "2021-05-28",
           "lat": 28.25316000000004,
           "lon": 82.91058000000004,
-          "probability": 55.2,
-          "rain_14day": 124.9,
-          "slope": 42.7,
+          "probability": 63.6,
+          "rain_14day": 111.8,
+          "slope": 30.2,
           "predicted_hazards": [
             "Landslide / Mudslide"
           ],
@@ -681,9 +674,9 @@
           "date": "2021-06-24",
           "lat": 29.2500001,
           "lon": 82.2167016,
-          "probability": 35.1,
+          "probability": 49.7,
           "rain_14day": 288.5,
-          "slope": 17.0,
+          "slope": 20.8,
           "predicted_hazards": [
             "Landslide / Mudslide",
             "Flash Flood / Inundation"
@@ -698,12 +691,11 @@
           "date": "2021-07-08",
           "lat": 27.76465000000007,
           "lon": 83.47024000000005,
-          "probability": 64.8,
+          "probability": 69.4,
           "rain_14day": 335.6,
           "slope": 41.9,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -715,14 +707,14 @@
           "date": "2022-10-09",
           "lat": 29.146120000000053,
           "lon": 81.85448000000008,
-          "probability": 28.4,
-          "rain_14day": 292.1,
-          "slope": 14.4,
+          "probability": 34.8,
+          "rain_14day": 297.2,
+          "slope": 30.4,
           "predicted_hazards": [
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": false,
-          "elevated_risk": false,
+          "exact_match": true,
+          "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
         },
@@ -731,13 +723,13 @@
           "date": "2022-08-07",
           "lat": 28.390090000000043,
           "lon": 83.11711000000008,
-          "probability": 69.2,
-          "rain_14day": 279.7,
-          "slope": 14.6,
+          "probability": 69.7,
+          "rain_14day": 322.3,
+          "slope": 38.8,
           "predicted_hazards": [
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": false,
+          "exact_match": true,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -747,12 +739,10 @@
           "date": "2021-10-20",
           "lat": 26.59187000000003,
           "lon": 87.10534000000007,
-          "probability": 21.2,
+          "probability": 13.8,
           "rain_14day": 182.1,
-          "slope": 1.9,
-          "predicted_hazards": [
-            "Flash Flood / Inundation"
-          ],
+          "slope": 1.0,
+          "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
           "deaths": 1,
@@ -779,13 +769,13 @@
           "date": "2021-06-16",
           "lat": 28.2666961,
           "lon": 83.5832976,
-          "probability": 69.1,
+          "probability": 63.8,
           "rain_14day": 357.3,
-          "slope": 3.5,
+          "slope": 41.2,
           "predicted_hazards": [
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": false,
+          "exact_match": true,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -795,11 +785,12 @@
           "date": "2022-09-03",
           "lat": 28.690620000000024,
           "lon": 83.58839000000006,
-          "probability": 57.1,
+          "probability": 55.0,
           "rain_14day": 232.4,
-          "slope": 45.9,
+          "slope": 14.2,
           "predicted_hazards": [
-            "Landslide / Mudslide"
+            "Landslide / Mudslide",
+            "Flash Flood / Inundation"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -811,12 +802,11 @@
           "date": "2022-10-06",
           "lat": 28.37636000000003,
           "lon": 83.02216000000004,
-          "probability": 51.3,
+          "probability": 42.3,
           "rain_14day": 171.3,
-          "slope": 38.1,
+          "slope": 37.8,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": true,
           "elevated_risk": true,
@@ -828,7 +818,7 @@
           "date": "2021-10-20",
           "lat": 26.93196000000006,
           "lon": 87.84665000000007,
-          "probability": 23.3,
+          "probability": 18.5,
           "rain_14day": 363.0,
           "slope": 17.0,
           "predicted_hazards": [
@@ -844,24 +834,23 @@
     "Flood": {
       "bipad_total": 209,
       "tested": 50,
-      "detected": 39,
-      "detection_rate": 78.0,
-      "elevated_count": 44,
-      "elevated_rate": 88.0,
+      "detected": 24,
+      "detection_rate": 48.0,
+      "elevated_count": 45,
+      "elevated_rate": 90.0,
       "details": [
         {
           "location": "Aathbiskot, Rukum West",
           "date": "2022-07-28",
           "lat": 28.84600000000006,
           "lon": 82.52065000000005,
-          "probability": 62.8,
-          "rain_14day": 208.8,
-          "slope": 55.6,
+          "probability": 68.4,
+          "rain_14day": 313.4,
+          "slope": 53.3,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -871,9 +860,9 @@
           "date": "2021-06-19",
           "lat": 28.31322000000005,
           "lon": 84.89839000000006,
-          "probability": 52.6,
+          "probability": 65.7,
           "rain_14day": 263.7,
-          "slope": 29.3,
+          "slope": 39.9,
           "predicted_hazards": [
             "Landslide / Mudslide"
           ],
@@ -887,15 +876,14 @@
           "date": "2021-10-18",
           "lat": 28.92739000000006,
           "lon": 80.74607000000003,
-          "probability": 56.9,
-          "rain_14day": 121.6,
-          "slope": 21.3,
+          "probability": 28.4,
+          "rain_14day": 131.9,
+          "slope": 23.4,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
-          "elevated_risk": true,
+          "exact_match": false,
+          "elevated_risk": false,
           "deaths": 0,
           "status": "tested"
         },
@@ -904,7 +892,7 @@
           "date": "2021-06-10",
           "lat": 28.945840000000032,
           "lon": 81.63676000000004,
-          "probability": 57.1,
+          "probability": 54.1,
           "rain_14day": 64.2,
           "slope": 55.4,
           "predicted_hazards": [
@@ -920,7 +908,7 @@
           "date": "2021-10-20",
           "lat": 29.2500001,
           "lon": 82.2167016,
-          "probability": 23.8,
+          "probability": 22.4,
           "rain_14day": 122.0,
           "slope": 17.0,
           "predicted_hazards": [
@@ -936,7 +924,7 @@
           "date": "2021-07-02",
           "lat": 26.812860000000057,
           "lon": 85.25954000000007,
-          "probability": 57.2,
+          "probability": 67.0,
           "rain_14day": 415.6,
           "slope": 1.4,
           "predicted_hazards": [
@@ -952,9 +940,9 @@
           "date": "2022-06-21",
           "lat": 26.41516000000007,
           "lon": 88.00720000000007,
-          "probability": 51.1,
+          "probability": 67.6,
           "rain_14day": 351.4,
-          "slope": 1.4,
+          "slope": 0.9,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -968,14 +956,13 @@
           "date": "2021-06-16",
           "lat": 27.95817000000005,
           "lon": 83.65736000000004,
-          "probability": 62.3,
+          "probability": 67.0,
           "rain_14day": 372.0,
-          "slope": 23.5,
+          "slope": 45.1,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -985,14 +972,13 @@
           "date": "2022-10-06",
           "lat": 27.990350000000035,
           "lon": 82.91276000000005,
-          "probability": 54.5,
+          "probability": 55.1,
           "rain_14day": 240.4,
           "slope": 30.3,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -1002,9 +988,9 @@
           "date": "2021-06-14",
           "lat": 29.538280000000043,
           "lon": 81.61780000000005,
-          "probability": 58.9,
-          "rain_14day": 85.6,
-          "slope": 65.2,
+          "probability": 50.2,
+          "rain_14day": 109.8,
+          "slope": 57.0,
           "predicted_hazards": [
             "Landslide / Mudslide"
           ],
@@ -1018,9 +1004,9 @@
           "date": "2021-07-14",
           "lat": 27.829630000000066,
           "lon": 82.35444000000007,
-          "probability": 67.0,
+          "probability": 65.9,
           "rain_14day": 101.6,
-          "slope": 28.2,
+          "slope": 14.2,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1051,7 +1037,7 @@
           "date": "2021-05-06",
           "lat": 29.360340000000065,
           "lon": 81.32408000000004,
-          "probability": 82.7,
+          "probability": 91.3,
           "rain_14day": 18.6,
           "slope": 16.7,
           "predicted_hazards": [
@@ -1083,9 +1069,9 @@
           "date": "2022-09-17",
           "lat": 28.52027000000004,
           "lon": 80.96565000000004,
-          "probability": 50.9,
+          "probability": 54.6,
           "rain_14day": 288.1,
-          "slope": 1.9,
+          "slope": 3.9,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1099,11 +1085,10 @@
           "date": "2021-10-19",
           "lat": 29.368540000000053,
           "lon": 80.97519000000005,
-          "probability": 59.7,
-          "rain_14day": 191.6,
-          "slope": 23.7,
+          "probability": 43.1,
+          "rain_14day": 200.3,
+          "slope": 2.8,
           "predicted_hazards": [
-            "Landslide / Mudslide",
             "Flash Flood / Inundation"
           ],
           "exact_match": true,
@@ -1116,14 +1101,13 @@
           "date": "2021-06-28",
           "lat": 27.99384000000003,
           "lon": 82.67143000000004,
-          "probability": 50.1,
+          "probability": 63.0,
           "rain_14day": 491.0,
           "slope": 43.7,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -1133,9 +1117,9 @@
           "date": "2022-08-28",
           "lat": 26.79190000000005,
           "lon": 86.69900000000007,
-          "probability": 55.0,
+          "probability": 55.9,
           "rain_14day": 89.7,
-          "slope": 1.4,
+          "slope": 0.9,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1149,14 +1133,14 @@
           "date": "2021-06-26",
           "lat": 28.02500000000003,
           "lon": 82.46558000000005,
-          "probability": 27.1,
+          "probability": 40.9,
           "rain_14day": 570.7,
-          "slope": 1.4,
+          "slope": 0,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
           "exact_match": true,
-          "elevated_risk": false,
+          "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
         },
@@ -1165,9 +1149,9 @@
           "date": "2021-09-06",
           "lat": 27.73165000000006,
           "lon": 85.41696000000007,
-          "probability": 32.2,
-          "rain_14day": 199.2,
-          "slope": 9.7,
+          "probability": 58.0,
+          "rain_14day": 241.6,
+          "slope": 0,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1181,7 +1165,7 @@
           "date": "2021-10-19",
           "lat": 27.13367000000005,
           "lon": 87.33563000000004,
-          "probability": 42.7,
+          "probability": 32.2,
           "rain_14day": 239.8,
           "slope": 26.5,
           "predicted_hazards": [
@@ -1197,13 +1181,11 @@
           "date": "2021-10-22",
           "lat": 28.49300000000005,
           "lon": 82.06911000000008,
-          "probability": 22.1,
+          "probability": 7.0,
           "rain_14day": 92.5,
           "slope": 9.2,
-          "predicted_hazards": [
-            "Flash Flood / Inundation"
-          ],
-          "exact_match": true,
+          "predicted_hazards": [],
+          "exact_match": false,
           "elevated_risk": false,
           "deaths": 1,
           "status": "tested"
@@ -1213,7 +1195,7 @@
           "date": "2021-07-04",
           "lat": 27.03917000000007,
           "lon": 85.71704000000005,
-          "probability": 80.1,
+          "probability": 63.4,
           "rain_14day": 508.4,
           "slope": 1.0,
           "predicted_hazards": [
@@ -1229,7 +1211,7 @@
           "date": "2021-08-27",
           "lat": 27.26159000000007,
           "lon": 86.05895000000004,
-          "probability": 62.4,
+          "probability": 59.3,
           "rain_14day": 335.7,
           "slope": 10.7,
           "predicted_hazards": [
@@ -1245,9 +1227,9 @@
           "date": "2021-08-27",
           "lat": 27.531780000000023,
           "lon": 83.52423000000005,
-          "probability": 58.1,
+          "probability": 63.4,
           "rain_14day": 341.2,
-          "slope": 1.4,
+          "slope": 0.9,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1261,7 +1243,7 @@
           "date": "2021-07-07",
           "lat": 28.20806000000005,
           "lon": 83.98452000000003,
-          "probability": 74.1,
+          "probability": 64.3,
           "rain_14day": 398.1,
           "slope": 0.9,
           "predicted_hazards": [
@@ -1277,7 +1259,7 @@
           "date": "2022-08-06",
           "lat": 26.71733000000006,
           "lon": 86.93621000000007,
-          "probability": 45.4,
+          "probability": 63.5,
           "rain_14day": 307.9,
           "slope": 1.4,
           "predicted_hazards": [
@@ -1309,14 +1291,13 @@
           "date": "2022-09-09",
           "lat": 29.870160000000052,
           "lon": 80.88376000000005,
-          "probability": 51.8,
+          "probability": 54.7,
           "rain_14day": 106.7,
-          "slope": 28.8,
+          "slope": 53.8,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 6,
           "status": "tested"
@@ -1326,14 +1307,13 @@
           "date": "2021-06-17",
           "lat": 27.511280000000056,
           "lon": 85.75572000000005,
-          "probability": 57.5,
+          "probability": 67.3,
           "rain_14day": 120.7,
           "slope": 31.5,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 1,
           "status": "tested"
@@ -1343,14 +1323,13 @@
           "date": "2021-06-15",
           "lat": 28.11909000000003,
           "lon": 84.81688000000008,
-          "probability": 53.6,
+          "probability": 60.6,
           "rain_14day": 126.4,
-          "slope": 28.8,
+          "slope": 30.7,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 1,
           "status": "tested"
@@ -1360,14 +1339,13 @@
           "date": "2021-10-19",
           "lat": 27.184100000000058,
           "lon": 86.29469000000006,
-          "probability": 53.4,
+          "probability": 42.9,
           "rain_14day": 217.1,
-          "slope": 24.4,
+          "slope": 41.5,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 1,
           "status": "tested"
@@ -1377,14 +1355,13 @@
           "date": "2021-08-30",
           "lat": 28.535030000000063,
           "lon": 83.51666000000006,
-          "probability": 65.3,
+          "probability": 70.1,
           "rain_14day": 429.2,
           "slope": 45.7,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -1394,14 +1371,14 @@
           "date": "2021-10-20",
           "lat": 27.655590000000075,
           "lon": 86.90195000000006,
-          "probability": 26.5,
-          "rain_14day": 219.2,
-          "slope": 53.2,
+          "probability": 85.0,
+          "rain_14day": 184.0,
+          "slope": 32.8,
           "predicted_hazards": [
-            "Landslide / Mudslide"
+            "Post-Fire / Barren-Land Debris Flow"
           ],
           "exact_match": false,
-          "elevated_risk": false,
+          "elevated_risk": true,
           "deaths": 1,
           "status": "tested"
         },
@@ -1427,9 +1404,9 @@
           "date": "2021-07-18",
           "lat": 26.755880000000047,
           "lon": 86.01212000000004,
-          "probability": 56.9,
+          "probability": 68.8,
           "rain_14day": 168.6,
-          "slope": 3.6,
+          "slope": 2.8,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1443,7 +1420,7 @@
           "date": "2021-05-06",
           "lat": 27.53875000000005,
           "lon": 86.69517000000008,
-          "probability": 40.4,
+          "probability": 49.0,
           "rain_14day": 82.8,
           "slope": 16.0,
           "predicted_hazards": [
@@ -1460,9 +1437,9 @@
           "date": "2021-09-03",
           "lat": 27.42839000000004,
           "lon": 85.03219000000007,
-          "probability": 31.4,
+          "probability": 57.9,
           "rain_14day": 275.1,
-          "slope": 1.4,
+          "slope": 3.5,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1476,13 +1453,11 @@
           "date": "2021-10-19",
           "lat": 26.71733000000006,
           "lon": 86.93621000000007,
-          "probability": 24.2,
+          "probability": 11.6,
           "rain_14day": 203.9,
           "slope": 1.4,
-          "predicted_hazards": [
-            "Flash Flood / Inundation"
-          ],
-          "exact_match": true,
+          "predicted_hazards": [],
+          "exact_match": false,
           "elevated_risk": false,
           "deaths": 0,
           "status": "tested"
@@ -1492,14 +1467,13 @@
           "date": "2021-07-01",
           "lat": 28.36611000000005,
           "lon": 84.13913000000008,
-          "probability": 66.7,
+          "probability": 63.6,
           "rain_14day": 457.2,
-          "slope": 39.0,
+          "slope": 51.0,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -1509,7 +1483,7 @@
           "date": "2021-06-14",
           "lat": 29.33594000000005,
           "lon": 81.43072000000006,
-          "probability": 54.2,
+          "probability": 50.0,
           "rain_14day": 124.8,
           "slope": 42.9,
           "predicted_hazards": [
@@ -1525,7 +1499,7 @@
           "date": "2021-06-30",
           "lat": 27.14372000000003,
           "lon": 84.71809000000007,
-          "probability": 56.2,
+          "probability": 72.9,
           "rain_14day": 259.3,
           "slope": 2.8,
           "predicted_hazards": [
@@ -1541,9 +1515,9 @@
           "date": "2021-07-03",
           "lat": 26.864510000000053,
           "lon": 85.51732000000004,
-          "probability": 54.1,
+          "probability": 66.5,
           "rain_14day": 588.0,
-          "slope": 2.1,
+          "slope": 0,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1557,9 +1531,9 @@
           "date": "2021-09-02",
           "lat": 28.20806000000005,
           "lon": 83.98452000000003,
-          "probability": 31.3,
+          "probability": 38.3,
           "rain_14day": 651.2,
-          "slope": 3.7,
+          "slope": 4.7,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1573,9 +1547,9 @@
           "date": "2021-05-29",
           "lat": 27.46987000000007,
           "lon": 83.24785000000008,
-          "probability": 54.4,
+          "probability": 44.4,
           "rain_14day": 376.2,
-          "slope": 2.1,
+          "slope": 1.4,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1589,14 +1563,12 @@
           "date": "2021-10-20",
           "lat": 28.528230000000065,
           "lon": 81.11798000000005,
-          "probability": 36.5,
+          "probability": 12.1,
           "rain_14day": 128.8,
           "slope": 0.9,
-          "predicted_hazards": [
-            "Flash Flood / Inundation"
-          ],
-          "exact_match": true,
-          "elevated_risk": true,
+          "predicted_hazards": [],
+          "exact_match": false,
+          "elevated_risk": false,
           "deaths": 1,
           "status": "tested"
         },
@@ -1605,7 +1577,7 @@
           "date": "2021-07-01",
           "lat": 27.74682000000007,
           "lon": 84.75988000000007,
-          "probability": 63.5,
+          "probability": 66.8,
           "rain_14day": 443.9,
           "slope": 37.1,
           "predicted_hazards": [
@@ -1622,12 +1594,14 @@
           "date": "2021-10-05",
           "lat": 27.7120171,
           "lon": 85.3129501,
-          "probability": 9.7,
+          "probability": 42.2,
           "rain_14day": 112.0,
           "slope": 0,
-          "predicted_hazards": [],
-          "exact_match": false,
-          "elevated_risk": false,
+          "predicted_hazards": [
+            "Flash Flood / Inundation"
+          ],
+          "exact_match": true,
+          "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
         },
@@ -1636,14 +1610,13 @@
           "date": "2021-08-31",
           "lat": 27.889080000000035,
           "lon": 85.21776000000006,
-          "probability": 59.2,
+          "probability": 60.8,
           "rain_14day": 268.4,
           "slope": 49.7,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -1653,14 +1626,13 @@
           "date": "2022-07-01",
           "lat": 27.021750000000058,
           "lon": 86.42236000000008,
-          "probability": 56.8,
+          "probability": 60.3,
           "rain_14day": 387.6,
           "slope": 30.3,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
-          "exact_match": true,
+          "exact_match": false,
           "elevated_risk": true,
           "deaths": 0,
           "status": "tested"
@@ -1672,8 +1644,8 @@
       "tested": 50,
       "detected": 36,
       "detection_rate": 72.0,
-      "elevated_count": 43,
-      "elevated_rate": 86.0,
+      "elevated_count": 42,
+      "elevated_rate": 84.0,
       "details": [
         {
           "location": "Kailari, Kailali",
@@ -1696,9 +1668,9 @@
           "date": "2022-04-16",
           "lat": 27.1490811,
           "lon": 87.5944603,
-          "probability": 13.9,
-          "rain_14day": 302.3,
-          "slope": 11.6,
+          "probability": 2.6,
+          "rain_14day": 94.2,
+          "slope": 19.4,
           "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
@@ -1758,12 +1730,11 @@
           "date": "2022-05-10",
           "lat": 27.1229312,
           "lon": 87.1453288,
-          "probability": 53.4,
-          "rain_14day": 101.1,
-          "slope": 36.1,
+          "probability": 48.8,
+          "rain_14day": 73.6,
+          "slope": 29.4,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": false,
           "elevated_risk": true,
@@ -1807,9 +1778,9 @@
           "date": "2022-01-31",
           "lat": 27.7262537,
           "lon": 86.7812043,
-          "probability": 1.2,
-          "rain_14day": 49.6,
-          "slope": 11.7,
+          "probability": 6.5,
+          "rain_14day": 25.1,
+          "slope": 40.2,
           "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
@@ -1821,9 +1792,9 @@
           "date": "2022-05-20",
           "lat": 26.9825083,
           "lon": 87.3451034,
-          "probability": 49.4,
-          "rain_14day": 131.0,
-          "slope": 11.9,
+          "probability": 34.7,
+          "rain_14day": 52.3,
+          "slope": 10.3,
           "predicted_hazards": [
             "Flash Flood / Inundation"
           ],
@@ -1837,9 +1808,9 @@
           "date": "2022-04-26",
           "lat": 27.7815062,
           "lon": 85.3594518,
-          "probability": 10.9,
-          "rain_14day": 23.4,
-          "slope": 3.5,
+          "probability": 9.4,
+          "rain_14day": 24.1,
+          "slope": 29.0,
           "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
@@ -1851,9 +1822,9 @@
           "date": "2021-04-28",
           "lat": 27.6468087,
           "lon": 85.619863,
-          "probability": 85.0,
+          "probability": 91.7,
           "rain_14day": 6.7,
-          "slope": 3.1,
+          "slope": 11.9,
           "predicted_hazards": [
             "Wildfire / Forest Fire"
           ],
@@ -1867,9 +1838,9 @@
           "date": "2021-04-14",
           "lat": 27.1200086,
           "lon": 87.5364049,
-          "probability": 76.7,
+          "probability": 74.1,
           "rain_14day": 19.0,
-          "slope": 13.8,
+          "slope": 13.7,
           "predicted_hazards": [
             "Wildfire / Forest Fire"
           ],
@@ -1915,9 +1886,9 @@
           "date": "2022-03-26",
           "lat": 27.1490811,
           "lon": 87.5944603,
-          "probability": 39.6,
+          "probability": 75.8,
           "rain_14day": 16.3,
-          "slope": 19.4,
+          "slope": 20.4,
           "predicted_hazards": [
             "Wildfire / Forest Fire"
           ],
@@ -1947,7 +1918,7 @@
           "date": "2022-03-25",
           "lat": 28.1319035,
           "lon": 82.6947379,
-          "probability": 64.1,
+          "probability": 79.1,
           "rain_14day": 6.1,
           "slope": 35.1,
           "predicted_hazards": [
@@ -1979,9 +1950,9 @@
           "date": "2022-04-25",
           "lat": 27.7815062,
           "lon": 85.3594518,
-          "probability": 13.9,
+          "probability": 10.3,
           "rain_14day": 27.6,
-          "slope": 3.5,
+          "slope": 29.0,
           "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
@@ -1993,7 +1964,7 @@
           "date": "2022-04-25",
           "lat": 29.0239458,
           "lon": 81.4788235,
-          "probability": 85.0,
+          "probability": 89.6,
           "rain_14day": 1.9,
           "slope": 33.8,
           "predicted_hazards": [
@@ -2025,14 +1996,12 @@
           "date": "2022-04-24",
           "lat": 27.4277211,
           "lon": 86.713777,
-          "probability": 31.3,
+          "probability": 13.3,
           "rain_14day": 68.5,
           "slope": 7.7,
-          "predicted_hazards": [
-            "Flash Flood / Inundation"
-          ],
+          "predicted_hazards": [],
           "exact_match": false,
-          "elevated_risk": true,
+          "elevated_risk": false,
           "deaths": 0,
           "status": "tested"
         },
@@ -2041,12 +2010,10 @@
           "date": "2021-04-23",
           "lat": 27.6109788,
           "lon": 85.264281,
-          "probability": 19.8,
+          "probability": 7.4,
           "rain_14day": 23.3,
-          "slope": 11.0,
-          "predicted_hazards": [
-            "Flash Flood / Inundation"
-          ],
+          "slope": 8.8,
+          "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
           "deaths": 0,
@@ -2121,9 +2088,9 @@
           "date": "2022-01-31",
           "lat": 27.7262537,
           "lon": 86.7812043,
-          "probability": 1.2,
-          "rain_14day": 49.6,
-          "slope": 11.7,
+          "probability": 6.5,
+          "rain_14day": 25.1,
+          "slope": 40.2,
           "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
@@ -2135,12 +2102,11 @@
           "date": "2022-05-12",
           "lat": 28.5507325,
           "lon": 84.2423535,
-          "probability": 52.9,
+          "probability": 62.1,
           "rain_14day": 59.8,
           "slope": 26.5,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": false,
           "elevated_risk": true,
@@ -2168,9 +2134,9 @@
           "date": "2022-04-18",
           "lat": 27.1879842,
           "lon": 87.0498443,
-          "probability": 7.9,
-          "rain_14day": 29.9,
-          "slope": 15.4,
+          "probability": 6.2,
+          "rain_14day": 60.8,
+          "slope": 22.7,
           "predicted_hazards": [],
           "exact_match": false,
           "elevated_risk": false,
@@ -2182,9 +2148,9 @@
           "date": "2021-04-23",
           "lat": 27.6675536,
           "lon": 85.4034057,
-          "probability": 85.0,
-          "rain_14day": 9.9,
-          "slope": 3.3,
+          "probability": 86.5,
+          "rain_14day": 14.7,
+          "slope": 14.8,
           "predicted_hazards": [
             "Wildfire / Forest Fire"
           ],
@@ -2214,9 +2180,9 @@
           "date": "2022-06-18",
           "lat": 28.4068256,
           "lon": 82.1675807,
-          "probability": 36.7,
-          "rain_14day": 38.1,
-          "slope": 18.5,
+          "probability": 46.1,
+          "rain_14day": 25.1,
+          "slope": 24.8,
           "predicted_hazards": [
             "Landslide / Mudslide",
             "Flash Flood / Inundation"
@@ -2231,7 +2197,7 @@
           "date": "2021-04-19",
           "lat": 27.764635,
           "lon": 85.3008613,
-          "probability": 85.0,
+          "probability": 90.2,
           "rain_14day": 1.7,
           "slope": 1.4,
           "predicted_hazards": [
@@ -2311,12 +2277,11 @@
           "date": "2022-05-20",
           "lat": 28.032859,
           "lon": 82.9021693,
-          "probability": 50.1,
-          "rain_14day": 42.3,
-          "slope": 28.8,
+          "probability": 46.5,
+          "rain_14day": 40.0,
+          "slope": 30.1,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Landslide / Mudslide"
           ],
           "exact_match": false,
           "elevated_risk": true,
@@ -2344,12 +2309,11 @@
           "date": "2021-05-22",
           "lat": 27.317984,
           "lon": 86.501404,
-          "probability": 42.6,
+          "probability": 56.6,
           "rain_14day": 105.3,
           "slope": 17.1,
           "predicted_hazards": [
-            "Landslide / Mudslide",
-            "Flash Flood / Inundation"
+            "Cascading Landslide-Flood (LDOF)"
           ],
           "exact_match": false,
           "elevated_risk": true,
@@ -2377,9 +2341,9 @@
           "date": "2022-04-06",
           "lat": 28.1275303,
           "lon": 82.8494422,
-          "probability": 85.0,
-          "rain_14day": 1.9,
-          "slope": 55.5,
+          "probability": 85.2,
+          "rain_14day": 4.2,
+          "slope": 16.3,
           "predicted_hazards": [
             "Wildfire / Forest Fire"
           ],
@@ -2441,7 +2405,7 @@
           "date": "2022-12-21",
           "lat": 27.9843444,
           "lon": 83.7685296,
-          "probability": 59.2,
+          "probability": 73.9,
           "rain_14day": 0.0,
           "slope": 31.0,
           "predicted_hazards": [
@@ -2472,23 +2436,21 @@
     }
   },
   "false_negative_analysis": {
-    "total_missed": 42,
-    "with_casualties": 9,
-    "property_only": 33,
+    "total_missed": 50,
+    "with_casualties": 14,
+    "property_only": 36,
     "critical_misses": [
       {
-        "location": "Miklajung, Panchthar",
-        "date": "2021-10-19",
-        "lat": 26.93790000000007,
-        "lon": 87.65494000000007,
-        "probability": 42.5,
-        "rain_14day": 349.6,
-        "slope": 8.5,
-        "predicted_hazards": [
-          "Flash Flood / Inundation"
-        ],
+        "location": "Khaptad Chhededaha, Bajura",
+        "date": "2021-10-20",
+        "lat": 29.39867000000004,
+        "lon": 81.28290000000004,
+        "probability": 13.4,
+        "rain_14day": 218.9,
+        "slope": 24.4,
+        "predicted_hazards": [],
         "exact_match": false,
-        "elevated_risk": true,
+        "elevated_risk": false,
         "deaths": 1,
         "status": "tested",
         "expected_hazard": "Landslide"
@@ -2498,9 +2460,9 @@
         "date": "2022-10-06",
         "lat": 27.722830000000044,
         "lon": 85.17161000000004,
-        "probability": 8.6,
-        "rain_14day": 256.4,
-        "slope": 20.4,
+        "probability": 14.8,
+        "rain_14day": 185.3,
+        "slope": 16.3,
         "predicted_hazards": [],
         "exact_match": false,
         "elevated_risk": false,
@@ -2513,9 +2475,9 @@
         "date": "2022-10-07",
         "lat": 27.686960000000056,
         "lon": 85.23522000000008,
-        "probability": 21.7,
+        "probability": 17.4,
         "rain_14day": 164.6,
-        "slope": 6.9,
+        "slope": 3.0,
         "predicted_hazards": [
           "Flash Flood / Inundation"
         ],
@@ -2530,9 +2492,9 @@
         "date": "2021-09-01",
         "lat": 28.20806000000005,
         "lon": 83.98452000000003,
-        "probability": 52.0,
+        "probability": 56.3,
         "rain_14day": 672.4,
-        "slope": 0.9,
+        "slope": 4.7,
         "predicted_hazards": [
           "Flash Flood / Inundation"
         ],
@@ -2543,33 +2505,14 @@
         "expected_hazard": "Landslide"
       },
       {
-        "location": "Rhishing, Tanahu",
-        "date": "2021-07-08",
-        "lat": 27.90138000000007,
-        "lon": 84.22744000000006,
-        "probability": 73.4,
-        "rain_14day": 359.6,
-        "slope": 24.8,
-        "predicted_hazards": [
-          "Flash Flood / Inundation"
-        ],
-        "exact_match": false,
-        "elevated_risk": true,
-        "deaths": 1,
-        "status": "tested",
-        "expected_hazard": "Landslide"
-      },
-      {
         "location": "Bhokraha, Sunsari",
         "date": "2021-10-20",
         "lat": 26.59187000000003,
         "lon": 87.10534000000007,
-        "probability": 21.2,
+        "probability": 13.8,
         "rain_14day": 182.1,
-        "slope": 1.9,
-        "predicted_hazards": [
-          "Flash Flood / Inundation"
-        ],
+        "slope": 1.0,
+        "predicted_hazards": [],
         "exact_match": false,
         "elevated_risk": false,
         "deaths": 1,
@@ -2581,9 +2524,92 @@
         "date": "2021-06-14",
         "lat": 29.538280000000043,
         "lon": 81.61780000000005,
-        "probability": 58.9,
-        "rain_14day": 85.6,
-        "slope": 65.2,
+        "probability": 50.2,
+        "rain_14day": 109.8,
+        "slope": 57.0,
+        "predicted_hazards": [
+          "Landslide / Mudslide"
+        ],
+        "exact_match": false,
+        "elevated_risk": true,
+        "deaths": 1,
+        "status": "tested",
+        "expected_hazard": "Flood"
+      },
+      {
+        "location": "Bangad Kupinde, Salyan",
+        "date": "2021-10-22",
+        "lat": 28.49300000000005,
+        "lon": 82.06911000000008,
+        "probability": 7.0,
+        "rain_14day": 92.5,
+        "slope": 9.2,
+        "predicted_hazards": [],
+        "exact_match": false,
+        "elevated_risk": false,
+        "deaths": 1,
+        "status": "tested",
+        "expected_hazard": "Flood"
+      },
+      {
+        "location": "Apihimal, Darchula",
+        "date": "2022-09-09",
+        "lat": 29.870160000000052,
+        "lon": 80.88376000000005,
+        "probability": 54.7,
+        "rain_14day": 106.7,
+        "slope": 53.8,
+        "predicted_hazards": [
+          "Landslide / Mudslide"
+        ],
+        "exact_match": false,
+        "elevated_risk": true,
+        "deaths": 6,
+        "status": "tested",
+        "expected_hazard": "Flood"
+      },
+      {
+        "location": "Temal, Kavrepalanchok",
+        "date": "2021-06-17",
+        "lat": 27.511280000000056,
+        "lon": 85.75572000000005,
+        "probability": 67.3,
+        "rain_14day": 120.7,
+        "slope": 31.5,
+        "predicted_hazards": [
+          "Landslide / Mudslide"
+        ],
+        "exact_match": false,
+        "elevated_risk": true,
+        "deaths": 1,
+        "status": "tested",
+        "expected_hazard": "Flood"
+      },
+      {
+        "location": "Aarughat, Gorkha",
+        "date": "2021-06-15",
+        "lat": 28.11909000000003,
+        "lon": 84.81688000000008,
+        "probability": 60.6,
+        "rain_14day": 126.4,
+        "slope": 30.7,
+        "predicted_hazards": [
+          "Landslide / Mudslide"
+        ],
+        "exact_match": false,
+        "elevated_risk": true,
+        "deaths": 1,
+        "status": "tested",
+        "expected_hazard": "Flood"
+      },
+      {
+        "location": "Phikkal, Sindhuli",
+        "date": "2021-10-19",
+        "lat": 27.184100000000058,
+        "lon": 86.29469000000006,
+        "probability": 42.9,
+        "rain_14day": 217.1,
+        "slope": 41.5,
         "predicted_hazards": [
           "Landslide / Mudslide"
         ],
@@ -2598,12 +2624,27 @@
         "date": "2021-10-20",
         "lat": 27.655590000000075,
         "lon": 86.90195000000006,
-        "probability": 26.5,
-        "rain_14day": 219.2,
-        "slope": 53.2,
+        "probability": 85.0,
+        "rain_14day": 184.0,
+        "slope": 32.8,
         "predicted_hazards": [
-          "Landslide / Mudslide"
+          "Post-Fire / Barren-Land Debris Flow"
         ],
+        "exact_match": false,
+        "elevated_risk": true,
+        "deaths": 1,
+        "status": "tested",
+        "expected_hazard": "Flood"
+      },
+      {
+        "location": "Tikapur, Kailali",
+        "date": "2021-10-20",
+        "lat": 28.528230000000065,
+        "lon": 81.11798000000005,
+        "probability": 12.1,
+        "rain_14day": 128.8,
+        "slope": 0.9,
+        "predicted_hazards": [],
         "exact_match": false,
         "elevated_risk": false,
         "deaths": 1,
@@ -2615,9 +2656,9 @@
         "date": "2022-06-18",
         "lat": 28.4068256,
         "lon": 82.1675807,
-        "probability": 36.7,
-        "rain_14day": 38.1,
-        "slope": 18.5,
+        "probability": 46.1,
+        "rain_14day": 25.1,
+        "slope": 24.8,
         "predicted_hazards": [
           "Landslide / Mudslide",
           "Flash Flood / Inundation"

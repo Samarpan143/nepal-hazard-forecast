@@ -35,9 +35,9 @@ The system was validated against official **BIPAD Ground Truth** records (2021â€
 
 | Metric | Result | Context |
 | :--- | :--- | :--- |
-| **Accuracy (11-Feature)** | 88.4% | General multi-class prediction performance |
-| **ROC-AUC** | 0.927 | Model discrimination capability |
-| **Overall Hazard Alert Rate** | **67.3%** | Successfully flagged elevated risk in 101/150 historical events (Flood/Landslide/Fire) |
+| **Accuracy (11-Feature)** | 73.1% | General multi-class prediction performance (Optimized for minority class recall) |
+| **ROC-AUC** | 0.906 | Model discrimination capability |
+| **Overall Hazard Alert Rate** | **67.6%** | Successfully flagged elevated risk in historical events (Flood/Landslide/Fire) |
 
 ### Error Analysis (False Negatives)
 A deep-dive analysis of the 61 missed detections during the 150-incident backtest revealed high operational safety:
